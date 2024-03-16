@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+      - pip3 install pytest
+  build:
+    commands:
+      - echo start unittest for FizzBuzz on `date`
+      - python3 -m pytest --junit-xml=reports/fizzbuzz_unittest.xml
+  post_build:
+    commands:
+      - echo completed on `date`
+artifacts:
+  files:
+    - FizzBuzz.py
+reports:
+  my-unittest-report:
+    files:
+      - '**/*'
+    base-directory: reports/
+    file-format: JunitXml
